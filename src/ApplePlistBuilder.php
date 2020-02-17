@@ -2,11 +2,6 @@
 
 namespace appleplistbuilder;
 
-$path = dirname(__FILE__, 2) . "/vendor/autoload.php";
-if(is_file($path)){
-	require_once($path);
-}
-
 class ApplePlistBuilder{
 	private $bundleId;
 	private $title;

@@ -2,9 +2,6 @@
     "name": "drew/apple-plist-builder",
     "description": "Build a plist used for installation on Apple products.",
     "type": "library",
-    "require": {
-        "ext-SimpleXML": "*"
-    },
     "license": "MIT",
     "authors": [
         {
