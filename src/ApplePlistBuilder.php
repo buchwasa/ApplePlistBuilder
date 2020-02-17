@@ -8,11 +8,48 @@ if(is_file($path)){
 }
 
 class ApplePlistBuilder{
-	/** @var \SimpleXMLElement */
-	private $xml;
+	private $bundleId;
+	private $title;
+	private $url;
+	private $bundleVersion;
+	private $assetKind;
+	private $metadataKind;
 
 	public function __construct(string $bundleId, string $title, string $url, string $bundleVersion = "0.33.1", string $assetKind = "software-package", string $metadataKind = "software"){
-		$this->xml = simplexml_load_string(
+		$this->bundleId = $bundleId;
+		$this->title = $title;
+		$this->url = $url;
+		$this->bundleVersion = $bundleVersion;
+		$this->assetKind = $assetKind;
+		$this->metadataKind = $metadataKind;
+	}
+
+	public function getBundleId() : string{
+		return $this->bundleId;
+	}
+
+	public function getTitle() : string{
+		return $this->title;
+	}
+
+	public function getUrl() : string{
+		return $this->url;
+	}
+
+	public function getBundleVersion() : string{
+		return $this->bundleVersion;
+	}
+
+	public function getAssetKind() : string{
+		return $this->assetKind;
+	}
+
+	public function getMetadataKind() : string{
+		return $this->metadataKind;
+	}
+
+	public function toPlist(){
+		return simplexml_load_string(
 			<<<XML
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
@@ -25,21 +62,21 @@ class ApplePlistBuilder{
                         <array>
                             <dict>
                                 <key>kind</key>
-                                <string>$assetKind</string>
+                                <string>$this->assetKind</string>
                                 <key>url</key>
-                                <string>$url</string>
+                                <string>$this->url</string>
                             </dict>
                         </array>
                         <key>metadata</key>
                         <dict>
                             <key>bundle-identifier</key>
-                            <string>$bundleId</string>
+                            <string>$this->bundleId</string>
                             <key>bundle-version</key>
-                            <string>$bundleVersion</string>
+                            <string>$this->bundleVersion</string>
                             <key>kind</key>
-                            <string>$metadataKind</string>
+                            <string>$this->metadataKind</string>
                             <key>title</key>
-                            <string>$title</string>
+                            <string>$this->title</string>
                         </dict>
                     </dict>
                 </array>
@@ -47,41 +84,5 @@ class ApplePlistBuilder{
         </plist>
 XML
 		);
-	}
-
-	public function getAssets(){
-		return $this->xml->dict->array->dict->array->dict;
-	}
-
-	public function getMetadata(){
-		return $this->xml->dict->array->dict->dict;
-	}
-
-	public function getAssetKind() : string{
-		return $this->getAssets()->string[0];
-	}
-
-	public function getUrl() : string{
-		return $this->getAssets()->string[1];
-	}
-
-	public function getBundleId() : string{
-		return $this->getMetadata()->string[0];
-	}
-
-	public function getBundleVersion() : string{
-		return $this->getMetadata()->string[1];
-	}
-
-	public function getMetadataKind() : string{
-		return $this->getMetadata()->string[2];
-	}
-
-	public function getTitle() : string{
-		return $this->getMetadata()->string[3];
-	}
-
-	public function getPlist(){
-		return $this->xml;
 	}
 }
