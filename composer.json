@@ -1,5 +1,5 @@
 {
-    "name": "drew/apple-plist-builder",
+    "name": "buchwasa/apple-plist-builder",
     "description": "Build a plist used for installation on Apple products.",
     "type": "library",
     "license": "MIT",
@@ -7,5 +7,9 @@
         {
             "name": "Stephen"
         }
-    ]
+    ],
+    "require": {
+        "ext-simplexml": "*",
+        "php": "^7.0"
+    }
 }
