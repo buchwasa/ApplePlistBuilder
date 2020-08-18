@@ -5,7 +5,7 @@ namespace appleplistbuilder;
 
 use SimpleXMLElement;
 
-class ApplePlistBuilder
+final class ApplePlistBuilder
 {
     /** @var string */
     private $bundleId;
