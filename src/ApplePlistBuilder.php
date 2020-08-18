@@ -21,7 +21,10 @@ final class ApplePlistBuilder
     /** @var string */
     private $metadataKind;
 
-    public function __construct(string $bundleId, string $title, string $url, string $bundleVersion = "0.33.1", string $assetKind = "software-package", string $metadataKind = "software")
+    public function __construct(
+        string $bundleId, string $title, string $url, string $bundleVersion = "0.33.1",
+        string $assetKind = "software-package", string $metadataKind = "software"
+    )
     {
         $this->bundleId = $bundleId;
         $this->title = $title;
