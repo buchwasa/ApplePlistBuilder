@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace appleplistbuilder;
@@ -60,7 +61,7 @@ final class ApplePlistBuilder
         return $this->metadataKind;
     }
 
-    public function toPlist() : SimpleXMLElement
+    public function toPlist(): SimpleXMLElement
     {
         return simplexml_load_string(
             <<<XML
