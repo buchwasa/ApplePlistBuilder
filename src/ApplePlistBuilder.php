@@ -64,9 +64,12 @@ final class ApplePlistBuilder
         return $this->metadataKind;
     }
 
-    public function toPlist(): SimpleXMLElement
+    /**
+     * @return SimpleXMLElement|null - Returns null if SimpleXMLElement failed to load.
+     */
+    public function toPlist(): ?SimpleXMLElement
     {
-        return simplexml_load_string(
+        $xmlString = simplexml_load_string(
             <<<XML
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
@@ -101,5 +104,6 @@ final class ApplePlistBuilder
         </plist>
 XML
         );
+        return $xmlString ? $xmlString : null;
     }
 }
